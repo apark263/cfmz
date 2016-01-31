@@ -5,9 +5,11 @@ structured as a very deep network with skip connections designed to have convolu
 adjusting to residual activations.  The training protocol uses minimal pre-processing (mean
 subtraction) and very simple data augmentation (shuffling, flipping, and cropping).  All model
 parameters (even batch norm parameters) are updated using simple stochastic gradient descent with
-weight decay.  The learning rate is dropped only twice (at 90 and 135 epochs).  Many thanks to Dr.
-He and his team at MSRA for their helpful input in replicating the model as described in their
-paper.
+weight decay.  The learning rate is dropped only twice (at 90 and 135 epochs).  
+
+### Acknowledgments
+Many thanks to Dr. He and his team at MSRA for their helpful input in replicating the model as
+described in their paper.
 
 ### Model script
 The model train script is included ([cifar10_msra.py](./cifar10_msra.py)).
