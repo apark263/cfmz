@@ -19,7 +19,7 @@ The trained weights file can be downloaded from AWS ([cifar10_msra_e180.p](https
 
 ### Performance
 Training this model with the options described below should be able to achieve above 93.5% top-1
-error using only mean subtraction, random cropping, and random flips.  This is roughly the same
+accuracy using only mean subtraction, random cropping, and random flips.  This is roughly the same
 performance achieved in the paper with the 56-layer network.
 
 ## Instructions
