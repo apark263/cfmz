@@ -19,10 +19,10 @@ The trained weights file can be downloaded from AWS
 
 | Model Depth | Model File |
 | ----------- | ---------- |
-|  20 | ([cifar10_msra_020_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p)) |
-|  32 | ([cifar10_msra_032_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p)) |
-|  56 | ([cifar10_msra_056_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p)) |
-| 110 | ([cifar10_msra_110_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p)) |
+|  20 | [cifar10_msra_020_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p) |
+|  32 | [cifar10_msra_032_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p) |
+|  56 | [cifar10_msra_056_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p) |
+| 110 | [cifar10_msra_110_e180.p](https://s3-us-west-1.amazonaws.com/nervana-modelzoo/cifar10_msra_e180.p) |
 
 ### Performance
 Training this model with the options described below should be able to achieve above 93.6% top-1
