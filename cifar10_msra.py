@@ -15,7 +15,8 @@
 # ----------------------------------------------------------------------------
 from neon.util.argparser import NeonArgparser
 from neon.initializers import Kaiming, IdentityInit
-from neon.layers import Conv, Pooling, GeneralizedCost, Affine, ResidualModule, Activation
+from neon.layers import Conv, Pooling, GeneralizedCost, Affine, Activation
+from neon.layers import MergeSum, SkipNode
 from neon.optimizers import GradientDescentMomentum, Schedule
 from neon.transforms import Rectlin, Softmax, CrossEntropyMulti, Misclassification
 from neon.models import Model
@@ -34,6 +35,7 @@ train = ImageLoader(set_name='train', shuffle=True, do_transforms=True, **imgset
 test = ImageLoader(set_name='validation', shuffle=False, do_transforms=False, **imgset_options)
 
 
+
 def conv_params(fsize, nfm, stride=1, relu=True):
     return dict(fshape=(fsize, fsize, nfm), strides=stride, padding=(1 if fsize > 1 else 0),
                 activation=(Rectlin() if relu else None),
@@ -41,13 +43,17 @@ def conv_params(fsize, nfm, stride=1, relu=True):
                 batch_norm=True)
 
 
-def module_factory(nfm, stride=1):
-    projection = None if stride == 1 else IdentityInit()
-    module = [Conv(**conv_params(3, nfm, stride=stride)),
-              Conv(**conv_params(3, nfm, relu=False))]
-    return [ResidualModule(module, projection),
-            Activation(Rectlin())]
+def id_params(nfm):
+    return dict(fshape=(1, 1, nfm), strides=2, padding=0, activation=None, init=IdentityInit())
 
+
+def module_factory(nfm, stride=1):
+    mainpath = [Conv(**conv_params(3, nfm, stride=stride)),
+                Conv(**conv_params(3, nfm, relu=False))]
+    sidepath = [SkipNode() if stride == 1 else Conv(**id_params(nfm))]
+    module = [MergeSum([mainpath, sidepath]),
+              Activation(Rectlin())]
+    return module
 
 # Structure of the deep residual part of the network:
 # args.depth modules of 2 convolutional layers each at feature map depths of 16, 32, 64
@@ -62,7 +68,8 @@ layers.append(Pooling(8, op='avg'))
 layers.append(Affine(nout=10, init=Kaiming(local=False), batch_norm=True, activation=Softmax()))
 
 model = Model(layers=layers)
-opt = GradientDescentMomentum(0.1, 0.9, wdecay=0.0001, schedule=Schedule([90, 135], 0.1))
+opt = GradientDescentMomentum(0.1, 0.9, wdecay=0.0001,
+                              schedule=Schedule([90, 135], 0.1))
 
 # configure callbacks
 callbacks = Callbacks(model, eval_set=test, metric=Misclassification(), **args.callback_args)
