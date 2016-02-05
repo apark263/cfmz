@@ -29,10 +29,10 @@ Training this model with the options described below should be able to achieve a
 accuracy using only mean subtraction, random cropping, and random flips.
 
 ## Instructions
-This script was tested with [neon version 1.2](https://github.com/NervanaSystems/neon/tree/v1.2.0).
+This script was tested with [neon version 1.2.1](https://github.com/NervanaSystems/neon/tree/v1.2.1).
 Make sure that your local repo is synced to this commit and run the [installation
 procedure](http://neon.nervanasys.com/docs/latest/user_guide.html#installation) before proceeding.
-Commit SHA for v1.2 is  `385483881ee1fe1f0445fc78d7edf5b8ddc5c8c5`
+Commit SHA for v1.2.1 is  `c460e6c12cc4ea6e7453c0335afadf1f5110a4f7`
 
 In addition, we use the branch that implements the merge sum layer type.
 
